@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function relComputer(){
+        return $this->hasMany('App\Models\Computer');
+    }
+
+    public function relMonitor(){
+        return $this->hasMany('App\Models\Monitor');
+    }
 }
