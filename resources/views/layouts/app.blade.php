@@ -59,6 +59,12 @@
                             <a class="nav-link" href="/usage">Histórico de Uso</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/sector">Setores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/responsible">Responsáveis</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/user">Usuários</a>
                         </li>
                     </ul>

@@ -13,4 +13,8 @@ class Sector extends Model
     public function relUsage(){
         return $this->hasMany('App\Usage');
     }
+
+    public function relReponsible(){
+        return $this->belongsTo('App\Models\Reponsible', 'sector_id');
+    }
 }

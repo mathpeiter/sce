@@ -10,7 +10,7 @@
     </a>
 </div>
   <div class="col-8 m-auto">
-    <h1 class="display-5">Lista de Computadores</h1>
+    <h1 class="display-5">Busca de Computadores</h1>
 
     <form name="search" id="search" method="post" action="{{url("computer/search")}}">
         @csrf

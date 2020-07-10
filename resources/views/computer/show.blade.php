@@ -65,6 +65,35 @@
           @csrf
           <input class="btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
         </form>
+        <form name="usage" id="usage" method="get" action="{{url("usage/create")}}">
+          <input class="form-control" type="hidden" name="patrimony" id="patrimony" value="{{$computer->patrimony}}" required>
+          <input class="btn-outline-secondary" type="submit" value="Movimentar">
+        </form>
     </div>
+</div>
+<div class="col-8 m-auto">
+  <div class="col-8 m-auto">
+<table class="table table-striped text-center">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Usuário</th>
+      <th scope="col">Setor</th>
+      <th scope="col">Patrimônio</th>
+      <th scope="col">Data de Movimentação</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($usages as $usage)
+    <tr>
+      <td>{{$usage->id}}</td>
+      <td>{{$usage->user_id}}</td>
+      <td>{{$usage->sector_id}}</td>
+      <td>{{$usage->patrimony}}</td>
+      <td>{{$usage->start_date}}</td>
+    @endforeach
+  </tbody>
+</table>
+</div>
 </div>
 @endsection

@@ -7,7 +7,7 @@
     </a>
 </div>
   <div class="col-8 m-auto">
-    <h1 class="display-5">Histórico de Uso</h1>
+    <h1 class="display-5">Busca de Histórico</h1>
 
     <form name="search" id="search" method="post" action="{{url("usage/search")}}">
         @csrf

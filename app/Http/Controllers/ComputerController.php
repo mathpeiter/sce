@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Models\Computer;
+use App\Models\Usage;
 
 class ComputerController extends Controller
 {
@@ -17,6 +18,7 @@ class ComputerController extends Controller
         $this->middleware('auth');
         $this->objUser=new User();
         $this->obgComputer=new Computer();
+        $this->obgUsage=new Usage();
     }
     /**
      * Display a listing of the resource.
@@ -79,7 +81,9 @@ class ComputerController extends Controller
     public function show($id)
     {
         $computer =  $this->obgComputer = Computer::find($id);
-        return view('computer\show', ['computer' => $computer]);
+        $patrimony = $computer->patrimony;
+        $usages = DB::select('select * from usages where patrimony = ?', [$patrimony]);
+        return view('computer\show', ['computer' => $computer], ['usages' => $usages]);
     }
 
     /**
