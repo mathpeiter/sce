@@ -12,6 +12,16 @@
   </div>
   <div class="col-8 m-auto">
     <h1 class="display-5">Lista de Monitores</h1>
+
+    <form name="search" id="search" method="post" action="{{url("monitor/search")}}">
+      @csrf
+      <div class="input-group">
+        @csrf
+        <input class="form-control" type="number" name="search" id="search" placeholder="Patrimonio" required>
+        <input class="btn-outline-secondary" type="submit" value="Buscar">
+      </div>
+    </form>
+
     <table class="table table-striped text-center">
         <thead>
           <tr>
@@ -25,12 +35,15 @@
         </thead>
         <tbody>
           @foreach ($monitors as $monitor)
+          @php
+            $user=$monitor->find($monitor->id)->relUser;
+          @endphp
           <tr>
             <td>{{$monitor->id}}</td>
             <td>{{$monitor->patrimony}}</td>
             <td>{{$monitor->brand}}</td>
             <td>{{$monitor->model}}</td>
-            <td>{{$monitor->user_id}}</td>
+            <td>{{$user->name}}</td>
             <td>
             <a href="{{url("monitor/$monitor->id")}}">
               <button class="btn btn-outline-secondary">Info</button>

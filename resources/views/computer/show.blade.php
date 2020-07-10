@@ -20,8 +20,11 @@
                 <td>{{$computer->id}}</td>
               </tr>
               <tr>
+                @php
+                  $user=$computer->find($computer->id)->relUser;
+                @endphp
                 <td>Usuário:</td>
-                <td>{{$computer->user_id}}</td>
+                <td>{{$user->name}}</td>
               </tr>
               <tr>
                 <td>Patrimonio:</td>

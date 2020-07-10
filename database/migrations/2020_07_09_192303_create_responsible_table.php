@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMonitorsTable extends Migration
+class CreateResponsibleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateMonitorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('monitors', function (Blueprint $table) {
+        Schema::create('responsibles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('patrimony')->unique();
-            $table->string('brand');
-            $table->string('model');
-            $table->string('screen');
-            $table->string('sn')->unique();
+            $table->string('registration')->unique();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->foreignId('sector_id')->constrained('sectors');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateMonitorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('monitors');
+        Schema::dropIfExists('responsible');
     }
 }

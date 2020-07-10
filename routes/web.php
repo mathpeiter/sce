@@ -27,3 +27,10 @@ Route::resource('/computer', 'ComputerController');
 Route::post('/computer/search', 'ComputerController@search');
 
 Route::resource('/monitor', 'MonitorController');
+Route::post('/monitor/search', 'MonitorController@search');
+
+Route::resource('/usage', 'UsageController');
+Route::post('/usage/search', 'UsageController@search');
+
+Route::resource('/maintenance', 'MaintenanceController');
+Route::post('/maintenance/search', 'MaintenanceController@search');

@@ -38,10 +38,18 @@ class User extends Authenticatable
     ];
 
     public function relComputer(){
-        return $this->hasMany('App\Models\Computer');
+        return $this->hasMany('App\Models\Computer', 'user_id');
     }
 
     public function relMonitor(){
-        return $this->hasMany('App\Models\Monitor');
+        return $this->hasMany('App\Models\Monitor', 'user_id');
+    }
+
+    public function relUsage(){
+        return $this->hasMany('App\Models\Usage', 'user_id');
+    }
+
+    public function relMaintenance(){
+        return $this->hasMany('App\Models\Maintenance', 'user_id');
     }
 }

@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="col-8 m-auto">
-    <a href="{{url("/")}}">
+
+<div class="col-8 m-auto">
+    <a href="{{url("/monitor")}}">
       <button class="btn btn-outline-secondary">Voltar</button>
     </a>
-    <a href="{{url("computer/create")}}">
+    <a href="{{url("/monitor/create")}}">
       <button class="btn btn-outline-secondary">Cadastrar</button>
     </a>
-</div>
+  </div>
   <div class="col-8 m-auto">
-    <h1 class="display-5">Lista de Computadores</h1>
+    <h1 class="display-5">Lista de Monitores</h1>
 
-    <form name="search" id="search" method="post" action="{{url("computer/search")}}">
+    <form name="search" id="search" method="post" action="{{url("monitor/search")}}">
       @csrf
       <div class="input-group">
         @csrf
@@ -33,23 +34,20 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($computers as $computer)
-          @php
-            $user=$computer->find($computer->id)->relUser;
-          @endphp
+          @foreach ($monitors as $monitor)
           <tr>
-            <td>{{$computer->id}}</td>
-            <td>{{$computer->patrimony}}</td>
-            <td>{{$computer->brand}}</td>
-            <td>{{$computer->model}}</td>
-            <td>{{$user->name}}</td>
+            <td>{{$monitor->id}}</td>
+            <td>{{$monitor->patrimony}}</td>
+            <td>{{$monitor->brand}}</td>
+            <td>{{$monitor->model}}</td>
+            <td>{{$monitor->user_id}}</td>
             <td>
-              <a href="{{url("computer/$computer->id")}}">
-                <button class="btn btn-outline-secondary">Info</button>
-              </a>
+            <a href="{{url("monitor/$monitor->id")}}">
+              <button class="btn btn-outline-secondary">Info</button>
+            </a>
             </td>
             <td>
-              <a href="{{url("computer/$computer->id/edit")}}">
+              <a href="{{url("monitor/$monitor->id/edit")}}">
                 <button class="btn btn-outline-secondary">Editar</button>
               </a>
             </td>

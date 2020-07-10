@@ -15,6 +15,7 @@
   <table class="table table-striped text-center">
       <thead>
         <tr>
+          <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">E-mail</th>
           <th scope="col">Ações</th>
@@ -23,6 +24,7 @@
       <tbody>
         @foreach ($users as $user)
             <tr>
+              <td>{{$user->id}}</td>
               <td>{{$user->name}}</td>
               <td>{{$user->email}}</td>
               <td>

@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
-use App\Models\Monitor;
 use App\Models\Usage;
+use App\Models\Sector;
 
-class MonitorController extends Controller
+class UsageController extends Controller
 {
     private $objUser;
-    private $obgMonitor;
+    private $obgUsage;
+    private $obgSector;
 
     public function __construct()
     {
         $this->middleware('auth');
         $this->objUser=new User();
-        $this->obgMonitor=new Monitor();
         $this->obgUsage=new Usage();
+        $this->obgSector=new Sector();
     }
     /**
      * Display a listing of the resource.
@@ -27,11 +28,8 @@ class MonitorController extends Controller
      */
     public function index()
     {
-        //dd($this->obgMonitor = Monitor::find(10));
-        //dd($this->objUser = User::find(1)->relMonitor);
-        //$monitors = DB::select('select * from monitors');
-        $monitors = $this->obgMonitor = Monitor::all();
-        return view('monitor\index', ['monitors' => $monitors]);
+        $usages = $this->obgUsage = Usage::all();
+        return view('usage\index', ['usages' => $usages]);
     }
 
     /**
@@ -39,9 +37,11 @@ class MonitorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('monitor\create');
+        $sectors = $this->obgSectors = Sector::all();
+        $patrimony = $request->patrimony;
+        return view('usage\create', ['sectors' => $sectors], ['patrimony' => $patrimony]);
     }
 
     /**
@@ -53,17 +53,15 @@ class MonitorController extends Controller
     public function store(Request $request)
     {
         $user_id = auth()->user()->id;
-        $reg = $this->obgMonitor->create([
+        $reg = $this->obgUsage->create([
             'user_id'=>$user_id,
+            'sector_id'=>$request->sector_id,
             'patrimony'=>$request->patrimony,
-            'brand'=>$request->brand,
-            'model'=>$request->model,
-            'screen'=>$request->screen,
-            'sn'=>$request->sn
+            'start_date'=>$request->start_date
         ]);
 
         if($reg){
-            return redirect('monitor');
+            return redirect('usage');
         }
     }
 
@@ -75,11 +73,8 @@ class MonitorController extends Controller
      */
     public function show($id)
     {
-        $monitor =  $this->obgMonitor = Monitor::find($id);
-        $patrimony = $monitor->patrimony;
-        //$usages =  $this->obgUsage = Usage::where(['patrimony'=>$patrimony]);
-        $usages = DB::select('select * from usages where patrimony = ?', [$patrimony]);
-        return view('monitor\show', ['monitor' => $monitor], ['usages' => $usages]);
+        $usage =  $this->obgUsage = Usage::find($id);
+        return view('usage\show', ['usage' => $usage]);
     }
 
     /**
@@ -90,8 +85,9 @@ class MonitorController extends Controller
      */
     public function edit($id)
     {
-        $monitor =  $this->obgMonitor = Monitor::find($id);
-        return view('monitor\edit', ['monitor' => $monitor]);
+        $usage =  $this->obgUsage = Usage::find($id);
+        $sectors =  $this->obgSector = Sector::All();
+        return view('usage\edit', ['usage' => $usage], ['sectors' => $sectors]);
     }
 
     /**
@@ -104,16 +100,14 @@ class MonitorController extends Controller
     public function update(Request $request, $id)
     {
         $user_id = auth()->user()->id;
-        $monitor =  $this->obgMonitor = Monitor::where(['id'=>$id])->update([
+        $usage =  $this->obgUsage = Usage::where(['id'=>$id])->update([
             'user_id'=>$user_id,
+            'sector_id'=>$request->sector_id,
             'patrimony'=>$request->patrimony,
-            'brand'=>$request->brand,
-            'model'=>$request->model,
-            'screen'=>$request->screen,
-            'sn'=>$request->sn
+            'start_date'=>$request->start_date
         ]);
 
-        return redirect('monitor');
+        return redirect('usage');
     }
 
     /**
@@ -124,14 +118,13 @@ class MonitorController extends Controller
      */
     public function destroy($id)
     {
-        $this->obgMonitor = Monitor::destroy($id);
-        return redirect('monitor');
+        //
     }
 
     public function search(Request $request)
     {
         $search = $request->search;
-        $monitors = DB::select('select * from monitors where patrimony = ?', [$search]);
-        return view('monitor\search', ['monitors' => $monitors]);
+        $usages = DB::select('select * from usages where patrimony = ?', [$search]);
+        return view('usage\search', ['usages' => $usages]);
     }
 }

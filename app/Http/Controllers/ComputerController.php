@@ -25,8 +25,10 @@ class ComputerController extends Controller
      */
     public function index()
     {
-        //dd($this->obgComputer = Computer::find(10));
-        //dd($this->objUser = User::find(1)->relComputer);
+        //dd($this->objUser->all());
+        //dd($this->obgComputer->all());
+        //dd($this->objUser = find(1)->relComputer);
+        //dd($this->obgComputer = find(2)->relUser);
         //$computers = DB::select('select * from computers');
         $computers = $this->obgComputer = Computer::all();
         return view('computer\index', ['computers' => $computers]);
@@ -133,7 +135,6 @@ class ComputerController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        //$computers =  $this->obgComputer = Computer::where(['patrimony'=>$search]);
         $computers = DB::select('select * from computers where patrimony = ?', [$search]);
         return view('computer\search', ['computers' => $computers]);
     }

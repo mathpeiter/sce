@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComputersTable extends Migration
+class CreateMaintenanceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateComputersTable extends Migration
      */
     public function up()
     {
-        Schema::create('computers', function (Blueprint $table) {
+        Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->string('patrimony')->unique();
-            $table->string('brand');
-            $table->string('model');
-            $table->string('so');
-            $table->string('processor');
-            $table->string('ram');
-            $table->string('memory');
-            $table->string('sn')->unique();
+            $table->string('patrimony');
+            $table->string('start_date');
+            $table->string('problem');
+            $table->string('end_date');
+            $table->string('solution');
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ class CreateComputersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('computers');
+        Schema::dropIfExists('maintenances');
     }
 }
