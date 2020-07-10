@@ -7,11 +7,14 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Models\Computer;
 use App\Models\Usage;
+use App\Models\Maintenance;
 
 class ComputerController extends Controller
 {
     private $objUser;
     private $obgComputer;
+    private $obgUsage;
+    private $obgMaintenances;
 
     public function __construct()
     {
@@ -19,6 +22,7 @@ class ComputerController extends Controller
         $this->objUser=new User();
         $this->obgComputer=new Computer();
         $this->obgUsage=new Usage();
+        $this->obgMaintenances  =new Maintenance();
     }
     /**
      * Display a listing of the resource.

@@ -69,9 +69,22 @@
           <input class="form-control" type="hidden" name="patrimony" id="patrimony" value="{{$computer->patrimony}}" required>
           <input class="btn-outline-secondary" type="submit" value="Movimentar">
         </form>
+        <form name="maintenance" id="maintenance" method="get" action="{{url("maintenance/create")}}">
+          <input class="form-control" type="hidden" name="patrimony" id="patrimony" value="{{$computer->patrimony}}" required>
+          <input class="btn-outline-secondary" type="submit" value="Registrar Manutenção">
+        </form>
+        <form name="search" id="search" method="post" action="{{url("maintenance/search")}}">
+          @csrf
+          <div class="input-group">
+            @csrf
+            <input class="form-control" type="hidden" name="search" id="search" value="{{$computer->patrimony}}" required>
+            <input class="btn-outline-secondary" type="submit" value="Consultar Manutenção">
+          </div>
+        </form>
     </div>
 </div>
 <div class="col-8 m-auto">
+  <h1 class="display-5">Histórico de Movimentação</h1>
   <div class="col-8 m-auto">
 <table class="table table-striped text-center">
   <thead>

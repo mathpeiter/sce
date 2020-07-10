@@ -65,6 +65,9 @@
                             <a class="nav-link" href="/responsible">Responsáveis</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/maintenance">Manutenções</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/user">Usuários</a>
                         </li>
                     </ul>
