@@ -6,7 +6,7 @@
   <a href="{{url("/responsible")}}">
     <button class="btn btn-outline-secondary">Voltar</button>
   </a>
-  <h1 class="display-5">Informações do Responável</h1>
+  <h1 class="display-5">Informações do Responsável</h1>
 </div>
 
 <div class="col-8 m-auto">
@@ -42,6 +42,7 @@
           @method('DELETE')
           @csrf
           <input class="btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
+        </form>
       </div>
   </div>
 @endsection

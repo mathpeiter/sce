@@ -53,6 +53,9 @@
           @csrf
           <input class="btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
         </form>
+        <a href="{{url("maintenance/$maintenance->id/edit")}}">
+          <button class="btn btn-outline-secondary">Editar</button>
+        </a>
     </div>
 </div>
 @endsection
