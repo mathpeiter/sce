@@ -28,7 +28,8 @@ class UsageController extends Controller
      */
     public function index()
     {
-        $usages = $this->obgUsage = Usage::all();
+        //$usages = $this->obgUsage = Usage::all();
+        $usages = $this->obgUsage = Usage::all()->sortByDesc('id');
         return view('usage\index', ['usages' => $usages]);
     }
 
@@ -125,7 +126,7 @@ class UsageController extends Controller
     {
         $search = $request->search;
         //$usages = DB::select('select * from usages where patrimony = ?', [$search]);
-        $usages = $this->obgUsage = Usage::where('patrimony', $search)->get();
+        $usages = $this->obgUsage = Usage::where('patrimony', $search)->orderBy('id', 'desc')->get();
         return view('usage\search', ['usages' => $usages]);
     }
 }

@@ -28,6 +28,7 @@ class MaintenanceController extends Controller
         $maintenances = $this->obgMaintenance = Maintenance::all();
         //$maintenances = $this->obgMaintenance = Maintenance::all()->orderBy('id', 'desc');
         //$maintenances = $this->obgMaintenance = Maintenance::where('id')->orderBy('id', 'desc')->get();
+        $maintenances = $this->obgMaintenance = Maintenance::all()->sortByDesc('id');
         return view('maintenance\index', ['maintenances' => $maintenances]);
     }
 
@@ -133,7 +134,7 @@ class MaintenanceController extends Controller
     {
         $search = $request->search;
         //$maintenances = DB::select('select * from maintenances where patrimony = ?', [$search]);
-        $maintenances = $this->obgMaintenance = Maintenance::where('patrimony', $search)->get();
+        $maintenances = $this->obgMaintenance = Maintenance::where('patrimony', $search)->orderBy('id', 'desc')->get();
         return view('maintenance\search', ['maintenances' => $maintenances]);
     }
 }
