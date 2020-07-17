@@ -10,9 +10,13 @@
     <form name="register" id="register" method="post" action="{{url("responsible/$responsible->id")}}">
         @method('PUT')
         @csrf
+        Matrícula:
         <input class="form-control" type="number" name="registration" id="registration" value="{{$responsible->registration}}">
+        Nome:
         <input class="form-control" type="text" name="name" id="name" value="{{$responsible->name}}">
+        E-mail:
         <input class="form-control" type="text" name="email" id="email" value="{{$responsible->email}}">
+        Setor:
         <select class="form-control" name="sector_id" id="sector_id" required>
             <option value="">Selecione</option>
             @foreach ($sectors as $sector)

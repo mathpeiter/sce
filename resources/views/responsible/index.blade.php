@@ -35,12 +35,15 @@
         </thead>
         <tbody>
           @foreach ($responsibles as $responsible)
+          @php
+            $sector=$responsible->find($responsible->id)->relSector;
+          @endphp
           <tr>
             <td>{{$responsible->id}}</td>
             <td>{{$responsible->registration}}</td>
             <td>{{$responsible->name}}</td>
             <td>{{$responsible->email}}</td>
-            <td>{{$responsible->sector_id}}</td>
+            <td>{{$sector->name}}</td>
             <td>
             <a href="{{url("responsible/$responsible->id")}}">
               <button class="btn btn-outline-secondary">Info</button>

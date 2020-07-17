@@ -69,6 +69,14 @@
           <input class="form-control" type="hidden" name="patrimony" id="patrimony" value="{{$computer->patrimony}}" required>
           <input class="btn-outline-secondary" type="submit" value="Movimentar">
         </form>
+        <form name="search" id="search" method="post" action="{{url("usage/search")}}">
+          @csrf
+          <div class="input-group">
+            @csrf
+            <input class="form-control" type="hidden" name="search" id="search" value="{{$computer->patrimony}}" required>
+            <input class="btn-outline-secondary" type="submit" value="Consultar Movimentação">
+          </div>
+        </form>
         <form name="maintenance" id="maintenance" method="get" action="{{url("maintenance/create")}}">
           <input class="form-control" type="hidden" name="patrimony" id="patrimony" value="{{$computer->patrimony}}" required>
           <input class="btn-outline-secondary" type="submit" value="Registrar Manutenção">
@@ -98,10 +106,14 @@
   </thead>
   <tbody>
     @foreach ($usages as $usage)
+    @php
+      $user=$usage->find($usage->id)->relUser;
+      $sector=$usage->find($usage->id)->relSector;
+    @endphp
     <tr>
       <td>{{$usage->id}}</td>
-      <td>{{$usage->user_id}}</td>
-      <td>{{$usage->sector_id}}</td>
+      <td>{{$user->name}}</td>
+      <td>{{$sector->name}}</td>
       <td>{{$usage->patrimony}}</td>
       <td>{{$usage->start_date}}</td>
     @endforeach

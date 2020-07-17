@@ -21,6 +21,17 @@
                 <td>Usuário:</td>
                 <td>{{$sector->name}}</td>
               </tr>
+              <tr>
+                @php
+                  $responsible=$sector->find($sector->id)->relReponsible;
+                @endphp
+                <td>Responsável:</td>
+                @if ($responsible)
+                  <td>{{$responsible->name}}</td>
+                @else
+                  <td>Responsável não cadastrado</td>
+                @endif
+              </tr>
           </tbody>
         </table>
         <form name="delete" id="delete" method="post" action="{{url("sector/$sector->id")}}">

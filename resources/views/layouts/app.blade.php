@@ -56,16 +56,16 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/usage">Histórico de Uso</a>
+                            <a class="nav-link" href="/usage">Histórico de Movimentação</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/maintenance">Manutenções</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/sector">Setores</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/responsible">Responsáveis</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/maintenance">Manutenções</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/user">Usuários</a>

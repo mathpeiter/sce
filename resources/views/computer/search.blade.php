@@ -34,12 +34,15 @@
         </thead>
         <tbody>
           @foreach ($computers as $computer)
+          @php
+            $user=$computer->find($computer->id)->relUser;
+          @endphp
           <tr>
             <td>{{$computer->id}}</td>
             <td>{{$computer->patrimony}}</td>
             <td>{{$computer->brand}}</td>
             <td>{{$computer->model}}</td>
-            <td>{{$computer->user_id}}</td>
+            <td>{{$user->name}}</td>
             <td>
               <a href="{{url("computer/$computer->id")}}">
                 <button class="btn btn-outline-secondary">Info</button>

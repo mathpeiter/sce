@@ -124,7 +124,8 @@ class UsageController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $usages = DB::select('select * from usages where patrimony = ?', [$search]);
+        //$usages = DB::select('select * from usages where patrimony = ?', [$search]);
+        $usages = $this->obgUsage = Usage::where('patrimony', $search)->get();
         return view('usage\search', ['usages' => $usages]);
     }
 }

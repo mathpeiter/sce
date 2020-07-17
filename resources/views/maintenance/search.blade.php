@@ -22,18 +22,21 @@
         <thead>
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">user_id</th>
-            <th scope="col">patrimony</th>
-            <th scope="col">start_date</th>
-            <th scope="col">end_date</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Patrimonio</th>
+            <th scope="col">Data Inicio</th>
+            <th scope="col">Data Fim</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
           @foreach ($maintenances as $maintenance)
+          @php
+            $user=$maintenance->find($maintenance->id)->relUser;
+          @endphp
           <tr>
             <td>{{$maintenance->id}}</td>
-            <td>{{$maintenance->user_id}}</td>
+            <td>{{$user->name}}</td>
             <td>{{$maintenance->patrimony}}</td>
             <td>{{$maintenance->start_date}}</td>
             <td>{{$maintenance->end_date}}</td>

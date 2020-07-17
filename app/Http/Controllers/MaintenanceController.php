@@ -26,6 +26,8 @@ class MaintenanceController extends Controller
     public function index()
     {
         $maintenances = $this->obgMaintenance = Maintenance::all();
+        //$maintenances = $this->obgMaintenance = Maintenance::all()->orderBy('id', 'desc');
+        //$maintenances = $this->obgMaintenance = Maintenance::where('id')->orderBy('id', 'desc')->get();
         return view('maintenance\index', ['maintenances' => $maintenances]);
     }
 
@@ -48,6 +50,12 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->end_date){
+
+        }else{
+            $request->end_date = "Não Finalizado";
+            $request->solution = "Não Finalizado";
+        };
         $user_id = auth()->user()->id;
         $reg = $this->obgMaintenance->create([
             'user_id'=>$user_id,
@@ -124,7 +132,8 @@ class MaintenanceController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $maintenances = DB::select('select * from maintenances where patrimony = ?', [$search]);
+        //$maintenances = DB::select('select * from maintenances where patrimony = ?', [$search]);
+        $maintenances = $this->obgMaintenance = Maintenance::where('patrimony', $search)->get();
         return view('maintenance\search', ['maintenances' => $maintenances]);
     }
 }

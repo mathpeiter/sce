@@ -27,14 +27,23 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Nome</th>
+            <th scope="col">Responsável</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
           @foreach ($sectors as $sector)
+          @php
+            $responsible=$sector->find($sector->id)->relReponsible;
+          @endphp
           <tr>
             <td>{{$sector->id}}</td>
             <td>{{$sector->name}}</td>
+            @if ($responsible)
+              <td>{{$responsible->name}}</td>
+            @else
+              <td>Responsável Não Cadastrado</td>
+            @endif
             <td>
             <a href="{{url("sector/$sector->id")}}">
               <button class="btn btn-outline-secondary">Info</button>

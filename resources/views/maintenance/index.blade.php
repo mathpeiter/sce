@@ -31,9 +31,12 @@
         </thead>
         <tbody>
           @foreach ($maintenances as $maintenance)
+          @php
+            $user=$maintenance->find($maintenance->id)->relUser;
+          @endphp
           <tr>
             <td>{{$maintenance->id}}</td>
-            <td>{{$maintenance->user_id}}</td>
+            <td>{{$user->name}}</td>
             <td>{{$maintenance->patrimony}}</td>
             <td>{{$maintenance->start_date}}</td>
             <td>{{$maintenance->end_date}}</td>

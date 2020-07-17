@@ -31,10 +31,14 @@
         </thead>
         <tbody>
           @foreach ($usages as $usage)
+          @php
+            $user=$usage->find($usage->id)->relUser;
+            $sector=$usage->find($usage->id)->relSector;
+          @endphp
           <tr>
             <td>{{$usage->id}}</td>
-            <td>{{$usage->user_id}}</td>
-            <td>{{$usage->sector_id}}</td>
+            <td>{{$user->name}}</td>
+            <td>{{$sector->name}}</td>
             <td>{{$usage->patrimony}}</td>
             <td>{{$usage->start_date}}</td>
             <td>

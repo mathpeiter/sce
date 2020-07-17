@@ -10,6 +10,7 @@
     <form name="register" id="register" method="post" action="{{url("sector/$sector->id")}}">
         @method('PUT')
         @csrf
+        Nome:
         <input class="form-control" type="text" name="name" id="name" value="{{$sector->name}}"><br>
         <input class="btn-outline-secondary" type="submit" value="Salvar">
     </form>

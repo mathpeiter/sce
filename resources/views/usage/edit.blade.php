@@ -10,7 +10,7 @@
     <form name="register" id="register" method="post" action="{{url("usage/$usage->id")}}">
         @method('PUT')
         @csrf
-        <input class="form-control" type="number" name="patrimony" id="patrimony" value="{{$usage->patrimony}}" readonly>
+        <input class="form-control" type="number" name="patrimony" id="patrimony" value="{{$usage->patrimony}}" required readonly>
         <select class="form-control" name="sector_id" id="sector_id" required>
             @php
                 $sector=$usage->find($usage->id)->relSector;

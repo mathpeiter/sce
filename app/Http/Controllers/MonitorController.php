@@ -78,7 +78,8 @@ class MonitorController extends Controller
         $monitor =  $this->obgMonitor = Monitor::find($id);
         $patrimony = $monitor->patrimony;
         //$usages =  $this->obgUsage = Usage::where(['patrimony'=>$patrimony]);
-        $usages = DB::select('select * from usages where patrimony = ?', [$patrimony]);
+        //$usages = DB::select('select * from usages where patrimony = ?', [$patrimony]);
+        $usages = $this->obgUsage = Usage::where('patrimony', $patrimony)->orderBy('id', 'desc')->get();
         return view('monitor\show', ['monitor' => $monitor], ['usages' => $usages]);
     }
 
@@ -131,7 +132,8 @@ class MonitorController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $monitors = DB::select('select * from monitors where patrimony = ?', [$search]);
+        //$monitors = DB::select('select * from monitors where patrimony = ?', [$search]);
+        $monitors = $this->obgMonitor = Monitor::where('patrimony', $search)->get();
         return view('monitor\search', ['monitors' => $monitors]);
     }
 }

@@ -30,8 +30,11 @@
                 <td>{{$responsible->email}}</td>
               </tr>
               <tr>
+                @php
+                  $sector=$responsible->find($responsible->id)->relSector;
+                @endphp
                 <td>Setor:</td>
-                <td>Implementar</td>
+                <td>{{$sector->name}}</td>
               </tr>
           </tbody>
         </table>

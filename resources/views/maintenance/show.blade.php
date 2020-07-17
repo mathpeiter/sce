@@ -20,8 +20,11 @@
                 <td>{{$maintenance->id}}</td>
               </tr>
               <tr>
+                @php
+                  $user=$maintenance->find($maintenance->id)->relUser;
+                @endphp
                 <td>Usuário:</td>
-                <td>{{$maintenance->user_id}}</td>
+                <td>{{$user->name}}</td>
               </tr>
               <tr>
                 <td>Patrimonio:</td>

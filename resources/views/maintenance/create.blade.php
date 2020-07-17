@@ -12,8 +12,8 @@
         <input class="form-control" type="number" name="patrimony" id="patrimony" value="{{$patrimony}}" readonly required>
         <input class="form-control" type="date" name="start_date" id="start_date" placeholder="Data Inicio" required>  
         <input class="form-control" type="text" name="problem" id="problem" placeholder="Descrição do Problema" required>
-        <input class="form-control" type="date" name="end_date" id="end_date" placeholder="Data Fim" required>
-        <input class="form-control" type="text" name="solution" id="solution" placeholder="Descrição da Solução" required><br>
+        <input class="form-control" type="date" name="end_date" id="end_date" placeholder="Data Fim">
+        <input class="form-control" type="text" name="solution" id="solution" placeholder="Descrição da Solução"><br>
         <input class="btn-outline-secondary" type="submit" value="Cadastrar">
     </form>
 </div>

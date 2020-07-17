@@ -86,7 +86,10 @@ class ComputerController extends Controller
     {
         $computer =  $this->obgComputer = Computer::find($id);
         $patrimony = $computer->patrimony;
-        $usages = DB::select('select * from usages where patrimony = ?', [$patrimony]);
+        //$usages = DB::select('select * from usages where patrimony = ?', [$patrimony]);
+        $usages = $this->obgUsage = Usage::where('patrimony', $patrimony)->orderBy('id', 'desc')->get();
+
+
         return view('computer\show', ['computer' => $computer], ['usages' => $usages]);
     }
 
@@ -143,7 +146,9 @@ class ComputerController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $computers = DB::select('select * from computers where patrimony = ?', [$search]);
+        //$computers = DB::select('select * from computers where patrimony = ?', [$search]);
+        //$computers = $this->obgComputer = Computer::find($search);
+        $computers = $this->obgComputer = Computer::where('patrimony', $search)->get();
         return view('computer\search', ['computers' => $computers]);
     }
 }

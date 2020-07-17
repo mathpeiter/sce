@@ -35,12 +35,15 @@
         </thead>
         <tbody>
           @foreach ($monitors as $monitor)
+          @php
+            $user=$monitor->find($monitor->id)->relUser;
+          @endphp
           <tr>
             <td>{{$monitor->id}}</td>
             <td>{{$monitor->patrimony}}</td>
             <td>{{$monitor->brand}}</td>
             <td>{{$monitor->model}}</td>
-            <td>{{$monitor->user_id}}</td>
+            <td>{{$user->name}}</td>
             <td>
             <a href="{{url("monitor/$monitor->id")}}">
               <button class="btn btn-outline-secondary">Info</button>

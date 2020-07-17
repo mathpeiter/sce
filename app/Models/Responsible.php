@@ -11,6 +11,6 @@ class Responsible extends Model
         ];
 
     public function relSector(){
-        return $this->hasOne('App\Models\Sector');
+        return $this->belongsTo('App\Models\Sector', 'sector_id');
     }
 }

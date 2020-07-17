@@ -15,6 +15,6 @@ class Sector extends Model
     }
 
     public function relReponsible(){
-        return $this->belongsTo('App\Models\Reponsible', 'sector_id');
+        return $this->hasOne('App\Models\Responsible');
     }
 }
