@@ -25,10 +25,10 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        $maintenances = $this->obgMaintenance = Maintenance::all();
+        //$maintenances = $this->obgMaintenance = Maintenance::all();
         //$maintenances = $this->obgMaintenance = Maintenance::all()->orderBy('id', 'desc');
         //$maintenances = $this->obgMaintenance = Maintenance::where('id')->orderBy('id', 'desc')->get();
-        $maintenances = $this->obgMaintenance = Maintenance::all()->sortByDesc('id');
+        $maintenances = $this->obgMaintenance = Maintenance::all()->sortByDesc('id')->take(15);
         return view('maintenance\index', ['maintenances' => $maintenances]);
     }
 

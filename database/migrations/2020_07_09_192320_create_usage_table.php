@@ -18,7 +18,7 @@ class CreateUsageTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('sector_id')->constrained('sectors');
             $table->string('patrimony');
-            $table->string('start_date');
+            $table->date('start_date');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateUsageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usage');
+        Schema::dropIfExists('usages');
     }
 }

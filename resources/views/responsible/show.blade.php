@@ -34,15 +34,17 @@
                   $sector=$responsible->find($responsible->id)->relSector;
                 @endphp
                 <td>Setor:</td>
-                <td>{{$sector->name}}</td>
+                <td>{{$sector->name}}</td>  
               </tr>
           </tbody>
         </table>
+        @if (auth()->user()->permission == true)
         <form name="delete" id="delete" method="post" action="{{url("responsible/$responsible->id")}}">
           @method('DELETE')
           @csrf
-          <input class="btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
+          <input class="btn btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
         </form>
+        @endif
       </div>
   </div>
 @endsection

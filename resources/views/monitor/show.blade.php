@@ -27,7 +27,7 @@
                 <td>{{$user->name}}</td>
               </tr>
               <tr>
-                <td>Patrimonio:</td>
+                <td>Patrimônio:</td>
                 <td>{{$monitor->patrimony}}</td>
               </tr>
               <tr>
@@ -39,44 +39,62 @@
                 <td>{{$monitor->model}}</td>
               </tr>
               <tr>
-                <td>Tela:</td>
+                <td>Polegadas:</td>
                 <td>{{$monitor->screen}}</td>
               </tr>
               <tr>
                 <td>S/N:</td>
                 <td>{{$monitor->sn}}</td>
               </tr>
+              <tr>
+                @php
+                  $computer=$monitor->find($monitor->id)->relComputer;
+                @endphp
+
+                @if ($computer == null)
+                  <td>Computador relacionado:</td>
+                  <td>Nenhum</td>
+                @else
+                  <td>Computador relacionado:</td>
+                  <td>{{$computer->patrimony}}</td>
+                @endif
+              </tr>
           </tbody>
         </table>
-        <form name="delete" id="delete" method="post" action="{{url("monitor/$monitor->id")}}">
-          @method('DELETE')
-          @csrf
-          <input class="btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
-        </form>
+        <a href="{{url("monitor/$monitor->id/edit")}}">
+          <button class="btn btn-outline-secondary">Editar</button>
+        </a>
         <form name="usage" id="usage" method="get" action="{{url("usage/create")}}">
           <input class="form-control" type="hidden" name="patrimony" id="patrimony" value="{{$monitor->patrimony}}" required>
-          <input class="btn-outline-secondary" type="submit" value="Movimentar">
+          <input class="btn btn-outline-secondary" type="submit" value="Movimentar">
         </form>
         <form name="search" id="search" method="post" action="{{url("usage/search")}}">
           @csrf
           <div class="input-group">
             @csrf
             <input class="form-control" type="hidden" name="search" id="search" value="{{$monitor->patrimony}}" required>
-            <input class="btn-outline-secondary" type="submit" value="Consultar Movimentação">
+            <input class="btn btn-outline-secondary" type="submit" value="Consultar Movimentação">
           </div>
         </form>
         <form name="maintenance" id="maintenance" method="get" action="{{url("maintenance/create")}}">
           <input class="form-control" type="hidden" name="patrimony" id="patrimony" value="{{$monitor->patrimony}}" required>
-          <input class="btn-outline-secondary" type="submit" value="Registrar Manutenção">
+          <input class="btn btn-outline-secondary" type="submit" value="Registrar Manutenção">
         </form>
         <form name="search" id="search" method="post" action="{{url("maintenance/search")}}">
           @csrf
           <div class="input-group">
             @csrf
             <input class="form-control" type="hidden" name="search" id="search" value="{{$monitor->patrimony}}" required>
-            <input class="btn-outline-secondary" type="submit" value="Consultar Manutenção">
+            <input class="btn btn-outline-secondary" type="submit" value="Consultar Manutenção">
           </div>
         </form>
+        @if (auth()->user()->permission == true)
+        <form name="delete" id="delete" method="post" action="{{url("monitor/$monitor->id")}}">
+          @method('DELETE')
+          @csrf
+          <input class="btn btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
+        </form>
+        @endif
       </div>
   </div>
   <div class="col-8 m-auto">
@@ -103,7 +121,7 @@
         <td>{{$user->name}}</td>
         <td>{{$sector->name}}</td>
         <td>{{$usage->patrimony}}</td>
-        <td>{{$usage->start_date}}</td>
+        <td>{{\Carbon\Carbon::parse($usage->start_date)->format('d/m/Y')}}</td>
       @endforeach
     </tbody>
   </table>

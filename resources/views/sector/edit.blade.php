@@ -12,7 +12,7 @@
         @csrf
         Nome:
         <input class="form-control" type="text" name="name" id="name" value="{{$sector->name}}"><br>
-        <input class="btn-outline-secondary" type="submit" value="Salvar">
+        <input class="btn btn-outline-secondary" type="submit" value="Salvar">
     </form>
 </div>
 

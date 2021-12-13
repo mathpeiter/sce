@@ -20,7 +20,7 @@
         <input class="form-control" type="date" name="end_date" id="end_date" value="{{$maintenance->end_date}}" required>
         Solução:
         <input class="form-control" type="text" name="solution" id="solution" value="{{$maintenance->solution}}" required><br>
-        <input class="btn-outline-secondary" type="submit" value="Salvar">
+        <input class="btn btn-outline-secondary" type="submit" value="Salvar">
     </form>
 </div>
 

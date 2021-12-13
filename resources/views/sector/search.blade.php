@@ -18,7 +18,7 @@
       <div class="input-group">
         @csrf
         <input class="form-control" type="text" name="search" id="search" placeholder="Nome" required>
-        <input class="btn-outline-secondary" type="submit" value="Buscar">
+        <input class="btn btn-outline-secondary" type="submit" value="Buscar">
       </div>
     </form>
 

@@ -14,9 +14,10 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'root',
             'cpf' => '12345678900',
-            'cell' => '+5551999999999',
-            'email' => 'root@gmail.com',
-            'password' => 'root',
+            'cell' => '+55 51 9 9999-9999',
+            'email' => 'root@root.com',
+            'password' => Hash::make('root'),
+            'permission' => True,
         ]);
     }
 }

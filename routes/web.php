@@ -42,3 +42,7 @@ Route::post('/responsible/search', 'ResponsibleController@search');
 
 Route::resource('/maintenance', 'MaintenanceController');
 Route::post('/maintenance/search', 'MaintenanceController@search');
+
+Route::get('/report', 'ReportController@index');
+Route::get('/report1', 'ReportController@report1');
+Route::post('/search1', 'ReportController@search1');

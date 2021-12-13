@@ -33,6 +33,10 @@
                 <td>E-mail:</td>
                 <td>{{$user->email}}</td>
               </tr>
+              <tr>
+                <td>Permisão:</td>
+                <td>{{$user->permission}}</td>
+              </tr>
           </tbody>
         </table>
     </div>

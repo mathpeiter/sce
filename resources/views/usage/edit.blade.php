@@ -11,17 +11,22 @@
         @method('PUT')
         @csrf
         <input class="form-control" type="number" name="patrimony" id="patrimony" value="{{$usage->patrimony}}" required readonly>
+        @php
+            $sector=$usage->find($usage->id)->relSector;
+        @endphp
+        @if (auth()->user()->permission == true)
         <select class="form-control" name="sector_id" id="sector_id" required>
-            @php
-                $sector=$usage->find($usage->id)->relSector;
-            @endphp
             <option value="{{$sector->id}}">Selecione</option>
             @foreach ($sectors as $sector)
                 <option value="{{$sector->id}}">{{$sector->name}}</option>
             @endforeach
         </select>
+        @else
+        <input class="form-control" type="text" name="noADM" id="noADM" value="{{$sector->name}}" required readonly>
+        <input class="form-control" type="hidden" name="sector_id" id="sector_id" value="{{$sector->id}}" required readonly>
+        @endif
         <input class="form-control" type="date" name="start_date" id="start_date" value="{{$usage->start_date}}"><br>
-        <input class="btn-outline-secondary" type="submit" value="Salvar">
+        <input class="btn btn-outline-secondary" type="submit" value="Salvar">
     </form>
 </div>
 

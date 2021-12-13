@@ -34,11 +34,13 @@
               </tr>
           </tbody>
         </table>
+        @if (auth()->user()->permission == true)
         <form name="delete" id="delete" method="post" action="{{url("sector/$sector->id")}}">
           @method('DELETE')
           @csrf
-          <input class="btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
+          <input class="btn btn-outline-secondary" type="submit" value="Excluir" onclick="return confirm('Tem certeza que deseja deletar este registro?')">
         </form>
+        @endif
       </div>
   </div>
 @endsection

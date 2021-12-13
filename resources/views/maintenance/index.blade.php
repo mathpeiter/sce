@@ -14,7 +14,7 @@
       <div class="input-group">
         @csrf
         <input class="form-control" type="number" name="search" id="search" placeholder="Patrimonio" required>
-        <input class="btn-outline-secondary" type="submit" value="Buscar">
+        <input class="btn btn-outline-secondary" type="submit" value="Buscar">
       </div>
     </form>
 
@@ -44,8 +44,6 @@
               <a href="{{url("maintenance/$maintenance->id")}}">
                 <button class="btn btn-outline-secondary">Info</button>
               </a>
-            </td>
-            <td>
               <a href="{{url("maintenance/$maintenance->id/edit")}}">
                 <button class="btn btn-outline-secondary">Editar</button>
               </a>

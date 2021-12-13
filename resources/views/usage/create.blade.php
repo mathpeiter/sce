@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="col-8 m-auto">
-    <a href="{{url("/usage")}}">
+    <a href="{{url("/computer")}}">
         <button class="btn btn-outline-secondary">Voltar</button>
     </a>
     <h1 class="display-5">Movimentar Equipamento</h1>
@@ -17,7 +17,7 @@
             @endforeach
         </select>
         <input class="form-control" type="date" name="start_date" id="start_date" placeholder="Data Inicio" required>
-        <input class="btn-outline-secondary" type="submit" value="Cadastrar">
+        <input class="btn btn-outline-secondary" type="submit" value="Cadastrar">
     </form>
 </div>
 

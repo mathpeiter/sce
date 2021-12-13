@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UserController extends Controller
@@ -13,6 +14,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->objUser=new User();
     }
 
     /**
@@ -69,7 +71,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user =  $this->obgUser = User::find($id);
+        return view('userControllerEdit', ['user' => $user]);
     }
 
     /**
@@ -81,7 +84,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (isset($request->password)) {
+            $user =  $this->objUser = User::where(['id'=>$id])->update([
+                'name' => $request->name,
+                'cpf' => $request->cpf,
+                'cell' => $request->cell,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'permission' => $request->permission
+            ]);
+        }
+        else{
+            $user =  $this->objUser = User::where(['id'=>$id])->update([
+                'name' => $request->name,
+                'cpf' => $request->cpf,
+                'cell' => $request->cell,
+                'email' => $request->email,
+                'permission' => $request->permission
+            ]);
+        }
+
+        return redirect('user');
     }
 
     /**

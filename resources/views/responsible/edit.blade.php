@@ -23,7 +23,7 @@
                 <option value="{{$sector->id}}">{{$sector->name}}</option>
             @endforeach
         </select><br>
-        <input class="btn-outline-secondary" type="submit" value="Salvar">
+        <input class="btn btn-outline-secondary" type="submit" value="Salvar">
     </form>
 </div>
 

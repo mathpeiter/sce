@@ -11,16 +11,7 @@
     </a>
   </div>
   <div class="col-8 m-auto">
-    <h1 class="display-5">Busca de Monitores</h1>
-
-    <form name="search" id="search" method="post" action="{{url("monitor/search")}}">
-      @csrf
-      <div class="input-group">
-        @csrf
-        <input class="form-control" type="number" name="search" id="search" placeholder="Patrimonio" required>
-        <input class="btn-outline-secondary" type="submit" value="Buscar">
-      </div>
-    </form>
+    <h1 class="display-5">Resultado da busca Monitores</h1>
 
     <table class="table table-striped text-center">
         <thead>
@@ -45,11 +36,9 @@
             <td>{{$monitor->model}}</td>
             <td>{{$user->name}}</td>
             <td>
-            <a href="{{url("monitor/$monitor->id")}}">
-              <button class="btn btn-outline-secondary">Info</button>
-            </a>
-            </td>
-            <td>
+              <a href="{{url("monitor/$monitor->id")}}">
+                <button class="btn btn-outline-secondary">Info</button>
+              </a>
               <a href="{{url("monitor/$monitor->id/edit")}}">
                 <button class="btn btn-outline-secondary">Editar</button>
               </a>

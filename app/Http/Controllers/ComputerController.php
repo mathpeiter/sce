@@ -8,6 +8,7 @@ use App\User;
 use App\Models\Computer;
 use App\Models\Usage;
 use App\Models\Maintenance;
+use App\Models\Sector;
 
 class ComputerController extends Controller
 {
@@ -15,6 +16,7 @@ class ComputerController extends Controller
     private $obgComputer;
     private $obgUsage;
     private $obgMaintenances;
+    private $obgSector;
 
     public function __construct()
     {
@@ -22,7 +24,8 @@ class ComputerController extends Controller
         $this->objUser=new User();
         $this->obgComputer=new Computer();
         $this->obgUsage=new Usage();
-        $this->obgMaintenances  =new Maintenance();
+        $this->obgMaintenances=new Maintenance();
+        $this->obgSector=new Sector();
     }
     /**
      * Display a listing of the resource.
@@ -36,8 +39,9 @@ class ComputerController extends Controller
         //dd($this->objUser = find(1)->relComputer);
         //dd($this->obgComputer = find(2)->relUser);
         //$computers = DB::select('select * from computers');
-        $computers = $this->obgComputer = Computer::all();
-        return view('computer\index', ['computers' => $computers]);
+        $computers = $this->obgComputer = Computer::all()->sortByDesc('updated_at')->take(15);
+        $sectors = $this->obgSector = Sector::all();
+        return view('computer\index', ['computers' => $computers], ['sectors' => $sectors]);
     }
 
     /**
@@ -61,6 +65,7 @@ class ComputerController extends Controller
         $user_id = auth()->user()->id;
         $reg = $this->obgComputer->create([
             'user_id'=>$user_id,
+            'sector_id'=>0,
             'patrimony'=>$request->patrimony,
             'brand'=>$request->brand,
             'model'=>$request->model,
@@ -85,11 +90,7 @@ class ComputerController extends Controller
     public function show($id)
     {
         $computer =  $this->obgComputer = Computer::find($id);
-        $patrimony = $computer->patrimony;
-        //$usages = DB::select('select * from usages where patrimony = ?', [$patrimony]);
-        $usages = $this->obgUsage = Usage::where('patrimony', $patrimony)->orderBy('id', 'desc')->get();
-
-
+        $usages = $this->obgUsage = Usage::where('patrimony', $computer->patrimony)->orderBy('id', 'desc')->take(5)->get();
         return view('computer\show', ['computer' => $computer], ['usages' => $usages]);
     }
 
@@ -145,10 +146,15 @@ class ComputerController extends Controller
 
     public function search(Request $request)
     {
-        $search = $request->search;
-        //$computers = DB::select('select * from computers where patrimony = ?', [$search]);
-        //$computers = $this->obgComputer = Computer::find($search);
-        $computers = $this->obgComputer = Computer::where('patrimony', $search)->get();
+        $search = $request->search1;
+
+        if (isset($search)) {
+            $computers = $this->obgComputer = Computer::where('patrimony', $search)->get();
+        }else{
+            $search = $request->search2;
+            $computers = $this->obgComputer = Computer::where('sector_id', $search)->get();
+        }
+
         return view('computer\search', ['computers' => $computers]);
     }
 }

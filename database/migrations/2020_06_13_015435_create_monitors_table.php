@@ -16,6 +16,8 @@ class CreateMonitorsTable extends Migration
         Schema::create('monitors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->integer('sector_id');
+            $table->integer('computer_id');
             $table->string('patrimony')->unique();
             $table->string('brand');
             $table->string('model');

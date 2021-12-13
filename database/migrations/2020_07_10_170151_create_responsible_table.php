@@ -30,6 +30,6 @@ class CreateResponsibleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('responsible');
+        Schema::dropIfExists('responsibles');
     }
 }

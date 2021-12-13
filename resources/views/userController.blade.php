@@ -6,9 +6,11 @@
   <a href="{{url("/")}}">
     <button class="btn btn-outline-secondary">Voltar</button>
   </a>
-  <a href="{{url("/")}}">
+  @if (auth()->user()->permission == true)
+  <a href="{{url("/register")}}">
     <button class="btn btn-outline-secondary">Cadastrar</button>
   </a>
+  @endif
   <h1 class="display-5">Lista de Usuários</h1>
 </div>
 <div class="col-8 m-auto">
@@ -28,9 +30,14 @@
               <td>{{$user->name}}</td>
               <td>{{$user->email}}</td>
               <td>
-              <a href="{{url("user/$user->id")}}">
+                <a href="{{url("user/$user->id")}}">
                   <button class="btn btn-outline-secondary">Info</button>
                 </a>
+                @if (auth()->user()->permission == true)
+                <a href="{{url("user/$user->id/edit")}}">
+                  <button class="btn btn-outline-secondary">Editar</button>
+                </a>
+                @endif
               </td>
             </tr>
           @endforeach

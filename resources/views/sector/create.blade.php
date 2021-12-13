@@ -9,8 +9,9 @@
     <h1 class="display-5">Cadastrar Setor</h1>
     <form name="register" id="register" method="post" action="{{url("sector")}}">
         @csrf
+        Nome:
         <input class="form-control" type="text" name="name" id="name" placeholder="Nome" required>
-        <input class="btn-outline-secondary" type="submit" value="Cadastrar">
+        <input class="btn btn-outline-secondary" type="submit" value="Cadastrar">
     </form>
 </div>
 

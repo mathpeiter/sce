@@ -7,12 +7,16 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Models\Usage;
 use App\Models\Sector;
+use App\Models\Computer;
+use App\Models\Monitor;
 
 class UsageController extends Controller
 {
     private $objUser;
     private $obgUsage;
     private $obgSector;
+    private $obgComputer;
+    private $obgMonitor;
 
     public function __construct()
     {
@@ -20,6 +24,8 @@ class UsageController extends Controller
         $this->objUser=new User();
         $this->obgUsage=new Usage();
         $this->obgSector=new Sector();
+        $this->obgComputer=new Computer();
+        $this->obgMonitor=new Monitor();
     }
     /**
      * Display a listing of the resource.
@@ -29,7 +35,7 @@ class UsageController extends Controller
     public function index()
     {
         //$usages = $this->obgUsage = Usage::all();
-        $usages = $this->obgUsage = Usage::all()->sortByDesc('id');
+        $usages = $this->obgUsage = Usage::all()->sortByDesc('updated_at')->take(15);
         return view('usage\index', ['usages' => $usages]);
     }
 
@@ -60,10 +66,29 @@ class UsageController extends Controller
             'patrimony'=>$request->patrimony,
             'start_date'=>$request->start_date
         ]);
+        
+        $computerTest = $this->obgComputer = Computer::where('patrimony', $request->patrimony)->get();
+        $monitorTest =  $this->obgMonitor = Monitor::where('patrimony', $request->patrimony)->get();
 
-        if($reg){
-            return redirect('usage');
+        if ($monitorTest == "[]") {
+            $computer = $this->obgComputer = Computer::where(['patrimony'=>$request->patrimony])->update([
+                'sector_id'=>$request->sector_id
+            ]);
+            $id = DB::table('computers')->where('patrimony', $request->patrimony)->first();
+            $computer =  $this->obgComputer = Computer::findOrFail($id->id);
+            $usages = $this->obgUsage = Usage::where('patrimony', $computer->patrimony)->orderBy('id', 'desc')->take(5)->get();
+            return view('computer/show', ['computer' => $computer], ['usages' => $usages]);
         }
+        if ($computerTest == "[]") {
+            $monitor = $this->obgMonitor = Monitor::where(['patrimony'=>$request->patrimony])->update([
+                'sector_id'=>$request->sector_id
+            ]);
+            $id = DB::table('monitors')->where('patrimony', $request->patrimony)->first();
+            $monitor =  $this->obgMonitor = Monitor::findOrFail($id->id);
+            $usages = $this->obgUsage = Usage::where('patrimony', $monitor->patrimony)->orderBy('id', 'desc')->take(5)->get();
+            return view('monitor/show', ['monitor' => $monitor], ['usages' => $usages]);
+        }
+        return redirect('usage');
     }
 
     /**
@@ -108,7 +133,28 @@ class UsageController extends Controller
             'start_date'=>$request->start_date
         ]);
 
-        return redirect('usage');
+        $computerTest = $this->obgComputer = Computer::where('patrimony', $request->patrimony)->get();
+        $monitorTest =  $this->obgMonitor = Monitor::where('patrimony', $request->patrimony)->get();
+
+        if ($monitorTest == "[]") {
+            $computer = $this->obgComputer = Computer::where(['patrimony'=>$request->patrimony])->update([
+                'sector_id'=>$request->sector_id
+            ]);
+            $id = DB::table('computers')->where('patrimony', $request->patrimony)->first();
+            $computer =  $this->obgComputer = Computer::findOrFail($id->id);
+            $usages = $this->obgUsage = Usage::where('patrimony', $computer->patrimony)->orderBy('id', 'desc')->take(5)->get();
+            return view('computer/show', ['computer' => $computer], ['usages' => $usages]);
+        }
+        if ($computerTest == "[]") {
+            $monitor = $this->obgMonitor = Monitor::where(['patrimony'=>$request->patrimony])->update([
+                'sector_id'=>$request->sector_id
+            ]);
+            $id = DB::table('monitors')->where('patrimony', $request->patrimony)->first();
+            $monitor =  $this->obgMonitor = Monitor::findOrFail($id->id);
+            $usages = $this->obgUsage = Usage::where('patrimony', $monitor->patrimony)->orderBy('id', 'desc')->take(5)->get();
+            return view('monitor/show', ['monitor' => $monitor], ['usages' => $usages]);
+        }
+        //return redirect('usage');
     }
 
     /**
@@ -119,7 +165,8 @@ class UsageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->obgUsage = Usage::destroy($id);
+        return redirect('usage');
     }
 
     public function search(Request $request)

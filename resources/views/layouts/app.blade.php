@@ -65,6 +65,9 @@
                             <a class="nav-link" href="/sector">Setores</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/report">Relatórios</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/responsible">Responsáveis</a>
                         </li>
                         <li class="nav-item">
@@ -77,6 +80,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                            <!--
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -85,6 +89,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                            -->
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -92,10 +97,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @php
+                                        $user_id = auth()->user()->id;
+                                    @endphp
+                                    <a class="dropdown-item" href="{{url("user/$user_id/edit")}}">Editar Cadastro</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Sair') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
