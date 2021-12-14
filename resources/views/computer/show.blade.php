@@ -73,10 +73,12 @@
         @endif
       </tbody>
     </table>
-    <a href="{{url("computer/$computer->id/edit")}}">
-      <button class="btn btn-outline-secondary">Editar</button>
-    </a>
     <div class="btn-group" role="group">
+      <div class="border">
+        <a href="{{url("computer/$computer->id/edit")}}">
+          <button class="btn btn-outline-secondary">Editar</button>
+        </a>
+      </div>
       <div class="border">
         <form name="usage" id="usage" method="get" action="{{url("usage/create")}}">
           <input class="form-control" type="hidden" name="patrimony" id="patrimony" value="{{$computer->patrimony}}" required>
@@ -141,6 +143,7 @@
           <td>{{$sector->name}}</td>
           <td>{{$usage->patrimony}}</td>
           <td>{{\Carbon\Carbon::parse($usage->start_date)->format('d/m/Y')}}</td>
+        </tr>
         @endforeach
       </tbody>
     </table>

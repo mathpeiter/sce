@@ -3,18 +3,19 @@
 @section('content')
 
 <div class="col-8 m-auto">
-  <a href="{{url("/")}}">
-    <button class="btn btn-outline-secondary">Voltar</button>
-  </a>
-  @if (auth()->user()->permission == true)
-  <a href="{{url("/register")}}">
-    <button class="btn btn-outline-secondary">Cadastrar</button>
-  </a>
-  @endif
-  <h1 class="display-5">Lista de Usuários</h1>
-</div>
-<div class="col-8 m-auto">
-  <table class="table table-striped text-center">
+  <div class="col-8 m-auto">
+    <a href="{{url("/")}}">
+      <button class="btn btn-outline-secondary">Voltar</button>
+    </a>
+    @if (auth()->user()->permission == true)
+    <a href="{{url("/register")}}">
+      <button class="btn btn-outline-secondary">Cadastrar</button>
+    </a>
+    @endif
+    <h1 class="display-5">Lista de Usuários</h1>
+  </div>
+  <div class="col-8 m-auto">
+    <table class="table table-striped text-center">
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -43,8 +44,6 @@
           @endforeach
       </tbody>
     </table>
+  </div>
 </div>
-
-
-
 @endsection

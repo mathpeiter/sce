@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="col-8 m-auto">
   <div class="col-8 m-auto">
     <a href="{{url("/")}}">
       <button class="btn btn-outline-secondary">Voltar</button>
     </a>
-</div>
-  <div class="col-8 m-auto">
     <h1 class="display-5">Histórico de Movimentação</h1>
-
+  </div>
+  <div class="col-8 m-auto">
     <form name="search" id="search" method="post" action="{{url("usage/search")}}">
       @csrf
       <div class="input-group">
@@ -17,7 +18,6 @@
         <input class="btn btn-outline-secondary" type="submit" value="Buscar">
       </div>
     </form>
-
     <table class="table table-striped text-center">
       <thead>
         <tr>
@@ -52,7 +52,6 @@
         @endforeach
       </tbody>
     </table>
-
   </div>
-
+</div>
 @endsection

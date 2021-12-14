@@ -3,13 +3,13 @@
 @section('content')
 
 <div class="col-8 m-auto">
+  <div class="col-8 m-auto">
     <a href="{{url("/report")}}">
       <button class="btn btn-outline-secondary">Voltar</button>
     </a>
+    <h1 class="display-5">Equipamentos por Setor</h1>
   </div>
   <div class="col-8 m-auto">
-    <h1 class="display-5">Equipamentos por Setor</h1>
-
     <form name="search1" id="search1" method="post" action="{{url("/search1")}}">
       @csrf
       <div class="input-group">
@@ -22,7 +22,6 @@
         <input class="btn btn-outline-secondary" type="submit" value="Buscar">
       </div>
     </form>
-
     <table class="table table-striped text-center">
       <thead>
         <tr>
@@ -85,24 +84,21 @@
             @endif
             <td>{{$user->name}}</td>
             <td>
-            <a href="{{url("monitor/$monitor->id")}}">
-              <button class="btn btn-outline-secondary">Info</button>
-            </a>
+              <a href="{{url("monitor/$monitor->id")}}">
+                <button class="btn btn-outline-secondary">Info</button>
+              </a>
               <a href="{{url("monitor/$monitor->id/edit")}}">
                 <button class="btn btn-outline-secondary">Editar</button>
               </a>
             </td>
           </tr>
           @endforeach
-        </tr>
-        @php
-            $count++;
-        @endphp
-
-        @endforeach
+          @php
+              $count++;
+          @endphp
+          @endforeach
       </tbody>
     </table>
-
   </div>
 </div>
 @endsection

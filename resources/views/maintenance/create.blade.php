@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-8 m-auto">
     <div class="col-8 m-auto">
-        <a href="{{url("/computer")}}">
+        <a href="{{url("/maintenance")}}">
             <button class="btn btn-outline-secondary">Voltar</button>
         </a>
     </div>

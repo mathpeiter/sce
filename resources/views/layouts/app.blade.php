@@ -65,10 +65,10 @@
                             <a class="nav-link" href="/sector">Setores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/report">Relatórios</a>
+                            <a class="nav-link" href="/responsible">Responsáveis</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/responsible">Responsáveis</a>
+                            <a class="nav-link" href="/report">Relatórios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/user">Usuários</a>

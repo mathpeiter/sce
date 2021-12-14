@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sector extends Model
 {
     protected $fillable = [
-        'id','name',
+        'id','name','responsible_id',
         ];
     
     public function relUsage(){
@@ -15,6 +15,6 @@ class Sector extends Model
     }
 
     public function relReponsible(){
-        return $this->hasOne('App\Models\Responsible');
+        return $this->belongsTo('App\Models\Responsible', 'responsible_id');
     }
 }

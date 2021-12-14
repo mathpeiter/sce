@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Sector;
+use App\Models\Responsible;
 
 class SectorController extends Controller
 {
 
     private $obgSector;
+    private $obgResponsibles;
 
     public function __construct()
     {
         $this->middleware('auth');
         $this->obgSector=new Sector();
+        $this->obgResponsibles=new Responsible();
     }
 
     /**
@@ -35,7 +38,8 @@ class SectorController extends Controller
      */
     public function create()
     {
-        return view('sector\create');
+        $responsibles = $this->obgResponsibles = Responsible::all();
+        return view('sector\create', ['responsibles' => $responsibles]);
     }
 
     /**
@@ -47,7 +51,8 @@ class SectorController extends Controller
     public function store(Request $request)
     {
         $reg = $this->obgSector->create([
-            'name'=>$request->name
+            'name'=>$request->name,
+            'responsible_id'=>$request->responsible_id
         ]);
 
         if($reg){
@@ -76,7 +81,8 @@ class SectorController extends Controller
     public function edit($id)
     {
         $sector =  $this->obgSector = Sector::find($id);
-        return view('sector\edit', ['sector' => $sector]);
+        $responsibles = $this->obgResponsibles = Responsible::all();
+        return view('sector\edit', ['sector' => $sector], ['responsibles' => $responsibles]);
     }
 
     /**
@@ -89,7 +95,8 @@ class SectorController extends Controller
     public function update(Request $request, $id)
     {
         $sector =  $this->obgSector = Sector::where(['id'=>$id])->update([
-            'name'=>$request->name
+            'name'=>$request->name,
+            'responsible_id'=>$request->responsible_id
         ]);
 
         return redirect('sector');

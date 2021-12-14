@@ -5,18 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Responsible;
-use App\Models\Sector;
 
 class ResponsibleController extends Controller
 {
     private $obgResponsible;
-    private $obgSector;
 
     public function __construct()
     {
         $this->middleware('auth');
         $this->obgResponsible=new Responsible();
-        $this->obgSector=new Sector();
     }
     /**
      * Display a listing of the resource.
@@ -36,8 +33,7 @@ class ResponsibleController extends Controller
      */
     public function create()
     {
-        $sectors = $this->obgSectors = Sector::all();
-        return view('responsible\create', ['sectors' => $sectors]);
+        return view('responsible\create');
     }
 
     /**
@@ -51,8 +47,7 @@ class ResponsibleController extends Controller
         $reg = $this->obgResponsible->create([
             'registration'=>$request->registration,
             'name'=>$request->name,
-            'email'=>$request->email,
-            'sector_id'=>$request->sector_id
+            'email'=>$request->email
         ]);
 
         if($reg){
@@ -69,10 +64,6 @@ class ResponsibleController extends Controller
     public function show($id)
     {
         $responsible =  $this->obgResponsible = Responsible::find($id);
-        //$patrimony = $monitor->patrimony;
-        //$usages =  $this->obgUsage = Usage::where(['patrimony'=>$patrimony]);
-        //$usages = DB::select('select * from usages where patrimony = ?', [$patrimony]);
-        //, ['usages' => $usages]
         return view('responsible\show', ['responsible' => $responsible]);
     }
 
@@ -85,8 +76,7 @@ class ResponsibleController extends Controller
     public function edit($id)
     {
         $responsible =  $this->obgResponsible = Responsible::find($id);
-        $sectors = $this->obgSectors = Sector::all();
-        return view('responsible\edit', ['responsible' => $responsible], ['sectors' => $sectors]);
+        return view('responsible\edit', ['responsible' => $responsible]);
     }
 
     /**
@@ -101,8 +91,7 @@ class ResponsibleController extends Controller
         $responsible =  $this->obgResponsible = Responsible::where(['id'=>$id])->update([
             'registration'=>$request->registration,
             'name'=>$request->name,
-            'email'=>$request->email,
-            'sector_id'=>$request->sector_id
+            'email'=>$request->email
         ]);
 
         return redirect('responsible');

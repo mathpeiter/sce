@@ -132,9 +132,15 @@ class MaintenanceController extends Controller
 
     public function search(Request $request)
     {
-        $search = $request->search;
-        //$maintenances = DB::select('select * from maintenances where patrimony = ?', [$search]);
-        $maintenances = $this->obgMaintenance = Maintenance::where('patrimony', $search)->orderBy('id', 'desc')->get();
+        $search = $request->search1;
+
+        if (isset($search)) {
+            $maintenances = $this->obgMaintenance = Maintenance::where('patrimony', $search)->orderBy('id', 'desc')->get();
+        }else{
+            $maintenances = $this->obgMaintenance = Maintenance::where('solution', 'Não Finalizado')->orderBy('id', 'desc')->get();
+
+        }
+
         return view('maintenance\search', ['maintenances' => $maintenances]);
     }
 }

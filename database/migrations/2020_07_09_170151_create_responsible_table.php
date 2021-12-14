@@ -18,7 +18,6 @@ class CreateResponsibleTable extends Migration
             $table->string('registration')->unique();
             $table->string('name');
             $table->string('email')->unique();
-            $table->foreignId('sector_id')->constrained('sectors')->unique();
             $table->timestamps();
         });
     }

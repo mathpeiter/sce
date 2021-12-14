@@ -80,8 +80,8 @@
               <button class="btn btn-outline-secondary">Editar</button>
             </a>
           </td>
-        @endforeach
         </tr>
+        @endforeach
       </tbody>
     </table>
   </div>
